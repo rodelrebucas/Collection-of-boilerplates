@@ -4,7 +4,7 @@
 Table of Contents:
 
 
-[Operations](ops) - Docker and ansible operations setup with centrifugo, echo, nginx, a js frontend and prometheus as services
+[Operations](operations) - Docker and ansible operations setup with centrifugo, echo, nginx, a js frontend and prometheus as services
 
 
 [Django app](django-app) - Production setup with django
