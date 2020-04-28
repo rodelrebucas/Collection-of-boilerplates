@@ -1,4 +1,4 @@
-### go-echo-app
+### echo-app
 
 ### Documentation
 
