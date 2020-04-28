@@ -1,0 +1,13 @@
+basePath: /
+info:
+  contact: {}
+  description: Backend server for the entangle app
+  license: {}
+  termsOfService: http://swagger.io/terms/
+  title: Entangle API docs
+  version: 0.1.0
+paths: {}
+swagger: "2.0"
+tags:
+- description: user authentication operations
+  name: Auth
