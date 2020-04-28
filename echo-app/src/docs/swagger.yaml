@@ -1,10 +1,10 @@
 basePath: /
 info:
   contact: {}
-  description: Backend server for the entangle app
+  description: Backend server for the sample app
   license: {}
   termsOfService: http://swagger.io/terms/
-  title: Entangle API docs
+  title: sample API docs
   version: 0.1.0
 paths: {}
 swagger: "2.0"

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"entangle/server/env"
-	"entangle/server/route"
+	"sample/server/env"
+	"sample/server/route"
 
 	// "github.com/centrifugal/gocent"
-	_ "entangle/server/docs"
+	_ "sample/server/docs"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -14,9 +14,9 @@ import (
 
 var environ *env.Var = env.LoadEnv()
 
-// @title Entangle API docs
+// @title sample API docs
 // @version 0.1.0
-// @description Backend server for the entangle app
+// @description Backend server for the sample app
 // @tag.name Auth
 // @tag.description user authentication operations
 // @termsOfService http://swagger.io/terms/

@@ -1,4 +1,4 @@
-module entangle/server
+module sample/server
 
 go 1.13
 
@@ -14,8 +14,8 @@ require (
 	github.com/swaggo/swag v1.6.3
 )
 
-replace entangle/server/route => ./route
+replace sample/server/route => ./route
 
-replace entange/server/env => ./env
+replace sample/server/env => ./env
 
-replace entangle/server/docs => ./docs
+replace sample/server/docs => ./docs

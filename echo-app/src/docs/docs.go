@@ -50,8 +50,8 @@ var SwaggerInfo = swaggerInfo{
 	Host:        "",
 	BasePath:    "/",
 	Schemes:     []string{},
-	Title:       "Entangle API docs",
-	Description: "Backend server for the entangle app",
+	Title:       "sample API docs",
+	Description: "Backend server for the sample app",
 }
 
 type s struct{}

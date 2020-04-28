@@ -2,8 +2,8 @@ package test
 
 import (
 	"encoding/json"
-	"entangle/server/env"
-	"entangle/server/route"
+	"sample/server/env"
+	"sample/server/route"
 	"log"
 	"net/http"
 	"net/http/httptest"
