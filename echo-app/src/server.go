@@ -22,12 +22,6 @@ var environ *env.Var = env.LoadEnv()
 // @termsOfService http://swagger.io/terms/
 // @BasePath /
 func main() {
-	// TODO
-	// c := gocent.New(gocent.Config{
-	// 	Addr: "http://localhost:8000",
-	// 	Key:  "<API key>",
-	// })
-
 	e := echo.New()
 
 	e.Use(middleware.Logger())

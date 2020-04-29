@@ -2,6 +2,8 @@ package env
 
 import (
 	"os"
+	"log"
+	"github.com/joho/godotenv"
 )
 
 // Var defines environment variables
@@ -11,12 +13,11 @@ type Var struct {
 
 // LoadEnv loads all environment variables in .env file
 func LoadEnv() *Var {
-	// Load env variables when in development
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// 	log.Fatal("Error loading .env file")
-	// }
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+		log.Fatal("Error loading .env file")
+	}
 
 	port := os.Getenv("PORT")
 	env := os.Getenv("ENV")
