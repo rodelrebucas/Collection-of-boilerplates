@@ -18,10 +18,6 @@ import (
 // @Param id formData string true "id of connecting client"
 // @Header 200 {string} Token
 // @Router /authenticate [post]
-func Auth(e *echo.Echo, s string) {
-	e.POST("/authenticate", AuthenticateHandler(s))
-}
-
 // AuthenticateHandler - handles /authenticate route
 func AuthenticateHandler(secret string) echo.HandlerFunc {
 	return func(c echo.Context) (err error) {

@@ -3,8 +3,6 @@ package main
 import (
 	"sample/server/env"
 	"sample/server/route"
-
-	// "github.com/centrifugal/gocent"
 	_ "sample/server/docs"
 
 	"github.com/labstack/echo/v4"
@@ -32,6 +30,8 @@ func main() {
 		e.GET("/swagger/*", echoSwagger.WrapHandler)
 	}
 
-	route.Auth(e, environ.Secret)
+	// Routes
+	route.Register(e, environ.Secret)
+
 	e.Logger.Fatal(e.Start(":" + environ.Port))
 }
