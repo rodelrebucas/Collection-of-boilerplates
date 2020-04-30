@@ -13,7 +13,8 @@ Features:
 A. Install dependencies:
 
 ```
-npm i --save-dev connected-react-router \
+npm i connected-react-router \
+                axios \
                 history \
                 i18next \
                 i18next-browser-languagedetector \
