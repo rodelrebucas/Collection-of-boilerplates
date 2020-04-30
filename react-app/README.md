@@ -9,3 +9,38 @@ Features:
 5. husky
 6. redux-devtools-extension
 7. react-i18next
+
+A. Install dependencies:
+
+```
+npm i --save-dev connected-react-router \
+                history \
+                i18next \
+                i18next-browser-languagedetector \
+                node-sass \
+                prop-types \
+                react-i18next \
+                react-redux \
+                react-router-dom \
+                redux \
+                redux-devtools-extension \
+                redux-persist \
+                redux-saga \
+                redux-starter-kit
+```
+
+B. Copy these folder to new project:
+
+    components/
+
+    containers/
+
+    example/
+
+    service/
+
+    store/
+
+    utils/
+
+C. Replace new App.js content
