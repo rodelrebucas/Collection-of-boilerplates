@@ -1,5 +1,5 @@
-import { createSelector } from 'redux-starter-kit';
-import { createSlice } from 'redux-starter-kit';
+import { createSelector } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 /** Sample root reducer
  *  const reducers = {

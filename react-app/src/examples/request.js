@@ -1,5 +1,5 @@
 
-import createAction from 'redux-starter-kit';
+import createAction from '@reduxjs/toolkit';
 import ApiService from '../service/api/Api.service';
 import { updateReducerAction } from '../store/root.reducer';
 

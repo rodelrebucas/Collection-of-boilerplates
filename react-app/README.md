@@ -2,7 +2,7 @@
 
 Features:
 
-1. redux-starter-kit - for redux setup.
+1. @reduxjs/toolkit - for redux setup.
 2. connected-react-router - for dispatching router action inside saga.
 3. redux-saga - async side affects.
 4. axios - for http requests.
@@ -27,7 +27,7 @@ npm i connected-react-router \
                 redux-devtools-extension \
                 redux-persist \
                 redux-saga \
-                redux-starter-kit
+                @reduxjs/toolkit
 ```
 
 B. Copy these folder to new project:
