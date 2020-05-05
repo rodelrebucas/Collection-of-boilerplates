@@ -7,6 +7,7 @@ import { AppContainer } from './containers/appContainer';
 import { AuthContextProvider } from './containers/auth/AuthContextProvider';
 import setupStore, { history } from './store/index';
 import setUpApi from './service/api';
+import './utils/i18n';
 
 setUpApi();
 const { store, persistor } = setupStore();
