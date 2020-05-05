@@ -8,13 +8,20 @@ import {
 } from './api.constants';
 
 const transformResponse = response => {
+  // We want the api to response with these keys
+  // otherwise throw an error
   const { status, message, data } = response;
-  return {
-    httpStatusCode: status,
-    message,
-    data,
-  };
+  if (response.hasOwnProperty(status) && response.hasOwnProperty(message) && response.hasOwnProperty(data))
+    return {
+      httpStatusCode: status,
+      message,
+      data,
+    };
+  else if (process.env.NODE_ENV === "development")
+    throw (new Error("Response is not an object!"))
+  else throw (new Error(SOMETHING_WENT_WRONG_MSG))
 };
+
 class ResponseError extends Error {
   response;
 

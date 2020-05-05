@@ -48,7 +48,7 @@ const mapResponseToState = (
 };
 
 const adminSlice = createSlice({
-    slice: 'adminSlice',
+    name: 'adminSlice',
     initialState,
     reducers: {
         updateReducerAction: (state, action) =>
