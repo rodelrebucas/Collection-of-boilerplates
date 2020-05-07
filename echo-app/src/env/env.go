@@ -20,7 +20,6 @@ func LoadEnv() {
 	}
 	// Make sure these env variables are present
 	if (os.Getenv("PORT") == "" ||
-		os.Getenv("ENV") == "" ||
 		os.Getenv("SECRET_KEY") == ""){
 		log.Fatal("None optional env variables: PORT, ENV, SECRET_KEY, CENTRIFUGO_ANONYMOUS_USER")
 	}
