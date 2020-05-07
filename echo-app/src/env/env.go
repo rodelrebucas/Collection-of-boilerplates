@@ -12,20 +12,16 @@ type Var struct {
 }
 
 // LoadEnv loads all environment variables in .env file
-func LoadEnv() *Var {
+func LoadEnv() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal(err)
 		log.Fatal("Error loading .env file")
 	}
-
-	port := os.Getenv("PORT")
-	env := os.Getenv("ENV")
-	secret := os.Getenv("SECRET_KEY")
-
-	return &Var{
-		Port:   port,
-		Env:    env,
-		Secret: secret,
+	// Make sure these env variables are present
+	if (os.Getenv("PORT") == "" ||
+		os.Getenv("ENV") == "" ||
+		os.Getenv("SECRET_KEY") == ""){
+		log.Fatal("None optional env variables: PORT, ENV, SECRET_KEY, CENTRIFUGO_ANONYMOUS_USER")
 	}
 }

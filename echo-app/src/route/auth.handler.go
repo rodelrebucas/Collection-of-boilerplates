@@ -1,6 +1,7 @@
 package route
 
 import (
+	"os"
 	"net/http"
 	"time"
 
@@ -19,8 +20,7 @@ import (
 // @Header 200 {string} Token
 // @Router /authenticate [post]
 // AuthenticateHandler - handles /authenticate route
-func AuthenticateHandler(secret string) echo.HandlerFunc {
-	return func(c echo.Context) (err error) {
+func AuthenticateHandler(c echo.Context) (err error) {
 		user := createUser()
 		if err = c.Bind(user); err != nil {
 			return
@@ -36,24 +36,23 @@ func AuthenticateHandler(secret string) echo.HandlerFunc {
 			}
 			return c.JSON(http.StatusBadRequest, error404)
 		}
-		tokenString := CreateToken(user, secret)
+		tokenString := CreateToken(user)
 		return c.JSON(http.StatusOK, struct {
 			Token string `json:"token"`
 		}{
 			Token: tokenString,
 		})
-	}
 }
 
 // CreateToken - creates the token for the specified user
-func CreateToken(u *user, secret string) (tokenString string) {
+func CreateToken(u *user) (tokenString string) {
 	timeNow := time.Now()
 	timeNowUTC := timeNow.UTC()
 	// finalize token props
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": u.ID,
 		"exp": timeNowUTC.Add(time.Minute * 30)})
-	tokenString, _ = token.SignedString([]byte(secret))
+	tokenString, _ = token.SignedString([]byte(os.Getenv("SECRET_KEY")))
 	return
 }
 

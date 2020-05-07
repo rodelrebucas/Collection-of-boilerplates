@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"sample/server/env"
 	"sample/server/route"
 	_ "sample/server/docs"
@@ -10,8 +11,6 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
-var environ *env.Var = env.LoadEnv()
-
 // @title sample API docs
 // @version 0.1.0
 // @description Backend server for the sample app
@@ -20,18 +19,15 @@ var environ *env.Var = env.LoadEnv()
 // @termsOfService http://swagger.io/terms/
 // @BasePath /
 func main() {
+	env.LoadEnv()
 	e := echo.New()
-
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.Secure())
-
-	if environ.Env == "development" {
+	if os.Getenv("ENV") == "development" {
 		e.GET("/swagger/*", echoSwagger.WrapHandler)
 	}
-
 	// Routes
-	route.Register(e, environ.Secret)
-
-	e.Logger.Fatal(e.Start(":" + environ.Port))
+	route.Register(e)
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
