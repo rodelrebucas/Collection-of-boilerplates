@@ -11,7 +11,7 @@ const transformResponse = response => {
   // We want the api to response with these keys
   // otherwise throw an error
   const { status, message, data } = response;
-  if (response.hasOwnProperty(status) && response.hasOwnProperty(message) && response.hasOwnProperty(data))
+  if (response.hasOwnProperty("status") && response.hasOwnProperty("message") && response.hasOwnProperty("data"))
     return {
       httpStatusCode: status,
       message,
