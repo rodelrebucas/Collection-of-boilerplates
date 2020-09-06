@@ -1,16 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { AppContainer } from './containers/appContainer';
 import { AuthContextProvider } from './containers/auth/AuthContextProvider';
-import setupStore, { history } from './store/index';
+import setupStore, { history, store, persistor } from './store';
 import setUpApi from './service/api';
 import './utils/i18n';
 
 setUpApi();
-const { store, persistor } = setupStore();
+setupStore();
 
 const App = () => (
   <AuthContextProvider>
