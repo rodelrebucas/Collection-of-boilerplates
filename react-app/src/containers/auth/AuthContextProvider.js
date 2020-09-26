@@ -74,10 +74,6 @@ const AuthContextProvider = props => {
     }
   }, [state.isAdmin, state.isAuthenticated]);
 
-  useEffect(() => {
-    setProps(props.children);
-  }, [props.children]);
-
   const { isAuthenticated, isAdmin, error, fetching } = state;
 
   return (
