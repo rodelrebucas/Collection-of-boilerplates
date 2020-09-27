@@ -119,6 +119,11 @@ function* requestQueue() {
 }
 
 function* root() {
+  /** Types of request that are handled.
+   *  REQUEST        - requestFlow handler
+   *  SEARCH_REQUEST - searchRequest handler
+   *  REQUEST_QUEUE  - requestQueue handler
+   */
   yield all([fork(requestFlow), fork(searchRequest), fork(requestQueue)]);
 }
 

@@ -13,6 +13,7 @@ const App = () => {
   let userRoutes;
   let loginRoute;
 
+  // TODO: Simply using a components. E.g <ProtectedRoutes />
   if (auth.isAuthenticated && !auth.isAdmin)
     userRoutes = <Route path="/user" component={RestaurantRoutes} />;
   if (auth.isAuthenticated && auth.isAdmin)
