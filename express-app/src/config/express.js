@@ -1,13 +1,12 @@
-import express from 'express';
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import compress from 'compression';
-import cors from 'cors';
-import helmet from 'helmet';
-import router from '../api';
-import { logs } from './vars';
-import errorHandler from '../middlewares/errors';
-import loggerFile from './logger';
+import express from "express";
+import morgan from "morgan";
+import compress from "compression";
+import cors from "cors";
+import helmet from "helmet";
+import router from "../api";
+import { logs } from "./vars";
+import errorHandler from "../middlewares/errors";
+import loggerFile from "./logger";
 
 /**
  * Express instance
@@ -20,8 +19,8 @@ const app = express();
 app.use(morgan(logs, { stream: loggerFile.stream }));
 
 // parse body params and attach them to req.body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // gzip compression
 app.use(compress());
@@ -33,7 +32,7 @@ app.use(helmet());
 app.use(cors());
 
 // mount api v1 routes
-app.use('/api/v1', router);
+app.use("/api/v1", router);
 
 // error handlers
 app.use(errorHandler.notFound);

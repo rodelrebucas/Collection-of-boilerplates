@@ -65,9 +65,8 @@ Documentations:
 4. Supertests - client side testing library for node
 5. Pm2 - Advanced, production process manager for Node.js
 6. cors - Enable cors on express
-7. body-parser - Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
-8. Compresssion - Node.js compression middleware.
-9. http-status - Utility to interact with HTTP status code.
+7. Compresssion - Node.js compression middleware.
+8. http-status - Utility to interact with HTTP status code.
 
 #### Dev Dependencies:
 

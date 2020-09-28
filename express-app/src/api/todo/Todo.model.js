@@ -1,4 +1,4 @@
-import LokiDb from '../../database';
+import LokiDb from "../../database";
 
 const todos = LokiDb.getCollection();
 
@@ -8,7 +8,7 @@ class Todo {
     this.description = req.description;
   }
 
-  save = req => {
+  save = (req) => {
     const todo = this.buildObject();
     return todos.insert(todo);
   };
@@ -22,11 +22,11 @@ class Todo {
     return todos.data;
   };
 
-  static findOne = id => {
+  static findOne = (id) => {
     return todos.get(id);
   };
 
-  static delete = id => {
+  static delete = (id) => {
     const todo = todos.get(id);
     return todos.remove(todo);
   };

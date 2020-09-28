@@ -1,12 +1,12 @@
-import loki from 'lokijs';
+import loki from "lokijs";
 
 const LokiDb = (() => {
   let db;
   let todosCollection;
 
   const initDb = () => {
-    db = new loki('dev.db');
-    todosCollection = db.addCollection('todos');
+    db = new loki("dev.db");
+    todosCollection = db.addCollection("todos");
     return todosCollection;
   };
 

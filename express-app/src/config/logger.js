@@ -1,9 +1,9 @@
-const winston = require('winston');
-const appRoot = require('app-root-path');
+const winston = require("winston");
+const appRoot = require("app-root-path");
 
 const options = {
   fileError: {
-    level: 'error',
+    level: "error",
     filename: `${appRoot}/logs/error.log`,
     handleExceptions: true,
     json: true,
@@ -12,7 +12,7 @@ const options = {
     colorize: false,
   },
   fileCombine: {
-    level: 'info',
+    level: "info",
     filename: `${appRoot}/logs/combined.log`,
     handleExceptions: true,
     json: true,
@@ -21,7 +21,7 @@ const options = {
     colorize: false,
   },
   console: {
-    level: 'info',
+    level: "info",
     format: winston.format.simple(),
     handleExceptions: true,
     json: true,
@@ -34,11 +34,11 @@ const combinedLogger = new winston.transports.File(options.fileCombine);
 const consoleLogger = new winston.transports.Console(options.console);
 
 const loggerToFile = winston.createLogger({
-  level: 'info',
+  level: "info",
   format: winston.format.json(),
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   loggerToFile.add(errorLogger);
   loggerToFile.add(combinedLogger);
 } else {

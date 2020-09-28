@@ -18,19 +18,13 @@ router.route("/").get((req, res) => {
 router
   .route("/todos")
   .get(getAll)
-  .post(
-    validationMiddleware.validate({ action: "POST" }, ToDoSchema),
-    add
-  )
+  .post(validationMiddleware.validate({ action: "POST" }, ToDoSchema), add)
   .all(errorMiddleware.allowOnly(["GET", "POST"]));
 
 router
   .route("/todos/:todoId")
   .get(get)
-  .put(
-    validationMiddleware.validate({ action: "PUT" }, ToDoSchema),
-    update
-  )
+  .put(validationMiddleware.validate({ action: "PUT" }, ToDoSchema), update)
   .delete(remove)
   .all(errorMiddleware.allowOnly(["GET", "PUT", "DELETE"]));
 
