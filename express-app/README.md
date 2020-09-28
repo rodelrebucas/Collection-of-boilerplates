@@ -78,7 +78,7 @@ Documentations:
 14. Eslint - Ecma script standards linting
 15. DotEnv - setting envirsonment variables as config file
 16. Cross-env - setting env in cross platform, overrides set .env variables
-17. Dotenv-safe - .env loader like Dotenv but allows you to have two .env one for your repo and one for your actual prod setup.
+17. Dotenv-safe - .env loader like Dotenv but allows you to have two .env one for your repo (.env.example) and one for your actual prod setup.
 18. nodemon - monitor changes and restarts your app
 19. prettier - (not installed as cli)code formatter, can be used as a cli (prettier used .prettierrc.yaml) or plugin for vscode, which also respects .prettierrc.yaml and .prettierignore
 20. Chai - a BDD / TDD assertion library for node

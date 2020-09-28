@@ -1,33 +1,35 @@
-import { SuccessResponse, CreatedResponse } from '../models/Response.model';
-import Todo from './Todo.model';
+import { SuccessResponse, CreatedResponse } from "../models/Response.model";
+import Todo from "./Todo.model";
 
-exports.add = (req, res, next) => {
+const add = (req, res, next) => {
   const todo = new Todo(req.body).save();
-  const response = new CreatedResponse('Todos', todo);
+  const response = new CreatedResponse("Todos", todo);
   res.status(response.status).send(response.toString());
 };
 
-exports.get = (req, res, next) => {
+const get = (req, res, next) => {
   const { todoId } = req.params;
-  const response = new SuccessResponse('Todos', Todo.findOne(todoId));
+  const response = new SuccessResponse("Todos", Todo.findOne(todoId));
   res.status(response.status).send(response.toString());
 };
 
-exports.getAll = (req, res, next) => {
+const getAll = (req, res, next) => {
   const results = Todo.findAll();
-  const response = new SuccessResponse('Todos', results);
+  const response = new SuccessResponse("Todos", results);
   res.status(response.status).send(response.toString());
 };
 
-exports.update = (req, res, next) => {
+const update = (req, res, next) => {
   const { todoId } = req.params;
   const payload = req.body;
-  const response = new SuccessResponse('Todos', Todo.update(todoId, payload));
+  const response = new SuccessResponse("Todos", Todo.update(todoId, payload));
   res.status(response.status).send(response.toString());
 };
 
-exports.delete = (req, res, next) => {
+const remove = (req, res, next) => {
   const { todoId } = req.params;
-  const response = new SuccessResponse('Todos', Todo.delete(todoId));
+  const response = new SuccessResponse("Todos", Todo.delete(todoId));
   res.status(response.status).send(response.toString());
 };
+
+export { add, get, getAll, update, remove };

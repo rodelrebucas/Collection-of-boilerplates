@@ -1,13 +1,13 @@
-import Joi from 'joi';
-import { BadRequestResponse } from '../api/models/Response.model';
+import Joi from "joi";
+import { BadRequestResponse } from "../api/models/Response.model";
 
 const checkErrors = (result) => {
   let errorResponse;
   if (result.error) {
     const { details } = result.error;
     const errors = [];
-    details.map(o => errors.push(o.message));
-    errorResponse = new BadRequestResponse('Invalid request to resource.', {
+    details.map((o) => errors.push(o.message));
+    errorResponse = new BadRequestResponse("Invalid request to resource.", {
       errors,
     });
   }
