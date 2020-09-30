@@ -2,7 +2,7 @@
 export const removeEmptyValues = data => {
   const nonEmptyFields = {};
   const isNonEmptyValues = value =>
-    value !== '' && value !== undefined && value !== null;
+    value !== "" && value !== undefined && value !== null;
   Object.keys(data).forEach(key => {
     if (isNonEmptyValues(data[key])) nonEmptyFields[key] = data[key];
   });

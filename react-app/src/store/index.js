@@ -1,20 +1,21 @@
-import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import { routerMiddleware } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
-import createRootReducer from './root.reducer';
-import rootSaga from './root.saga';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
+import { routerMiddleware } from "connected-react-router";
+import { createBrowserHistory } from "history";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import createRootReducer from "./root.reducer";
+import rootSaga from "./root.saga";
 
 // eslint-disable-next-line import/prefer-default-export
 export const history = createBrowserHistory();
 
 const persistConfig = {
-  key: 'sample', // Change with your correct reducer key
+  key: "main", // Change with your correct reducer key
   storage,
   // whitelist/blacklist list of reducer Array<string>
+  blacklist: ["router"],
 };
 
 const persistedRootReducer = persistReducer(

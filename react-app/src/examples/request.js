@@ -1,6 +1,6 @@
-import createAction from '@reduxjs/toolkit';
-import ApiService from '../service/api/Api.service';
-import { updateReducerAction } from '../store/root.reducer';
+import createAction from "@reduxjs/toolkit";
+import ApiService from "../service/api/Api.service";
+import { updateReducerAction } from "./reducers";
 
 /**
  *  Sample dispatching requests
@@ -10,9 +10,9 @@ import { updateReducerAction } from '../store/root.reducer';
  *  that handles action of type `REQUEST`
  */
 export const addRequestAction = payload => ({
-  type: 'REQUEST',
+  type: "REQUEST",
   method: ApiService.getApi().post,
-  route: '/post/route',
+  route: "/post/route",
   resultReducerAction: updateReducerAction,
   payload,
 });
@@ -21,7 +21,7 @@ export const addRequestAction = payload => ({
  *  that handles this action.
  */
 export const refreshUserAfterDeleteAction = createAction(
-  'REQUEST_REFRESH_USER_AFTER_DELETE',
+  "REQUEST_REFRESH_USER_AFTER_DELETE",
 );
 
 /** See `src/store/request.saga.js` to know what type of actions are automatically handled. */

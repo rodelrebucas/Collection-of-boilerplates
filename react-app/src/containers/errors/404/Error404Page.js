@@ -1,8 +1,8 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import './styles.scss';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import "./styles.scss";
 
-export default withRouter(props => {
+export default withRouter(() => {
   return (
     <div className="errorContainer">
       <h1 className="errorHeader">Ooops!</h1>

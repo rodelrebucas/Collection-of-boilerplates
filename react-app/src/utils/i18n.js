@@ -1,6 +1,6 @@
-import i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import { initReactI18next } from 'react-i18next';
+import i18n from "i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import { initReactI18next } from "react-i18next";
 
 /**
  * @Usage
@@ -17,19 +17,19 @@ i18n
     resources: {
       en: {
         translations: {
-          'Sample text': 'Some translation in English',
+          "Sample text": "Some translation in English",
         },
       },
       ja: {
         translations: {
-          'Sample text': 'Some translation in Japanese',
+          "Sample text": "Some translation in Japanese",
         },
       },
     },
-    fallbackLng: 'en',
-    debug: process.env.NODE_ENV === 'development',
-    ns: ['translations'],
-    defaultNS: 'translations',
+    fallbackLng: "en",
+    debug: process.env.NODE_ENV === "development",
+    ns: ["translations"],
+    defaultNS: "translations",
 
     keySeparator: false, // we use content as keys
 

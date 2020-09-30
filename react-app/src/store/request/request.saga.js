@@ -7,8 +7,8 @@ import {
   all,
   debounce,
   actionChannel,
-} from 'redux-saga/effects';
-import { channel, buffers } from 'redux-saga';
+} from "redux-saga/effects";
+import { channel, buffers } from "redux-saga";
 
 function* retry(count, msDelay, method, route, payload) {
   let error;
@@ -36,7 +36,7 @@ export function* returnErrorResponseAction(err, action) {
       action({
         loading: false,
         error: true,
-        errorMsg: '',
+        errorMsg: "",
         response,
       }),
     );
@@ -46,7 +46,7 @@ export function* returnErrorResponseAction(err, action) {
         loading: false,
         response: null,
         error: true,
-        errorMsg: err.message || '',
+        errorMsg: err.message || "",
       }),
     );
   }
@@ -64,7 +64,7 @@ function* handler(action) {
       resultReducerAction({
         loading: false,
         error: false,
-        errorMsg: '',
+        errorMsg: "",
         response,
       }),
     );
@@ -88,13 +88,13 @@ function* requestFlow() {
     yield fork(requestHandler, chan);
   }
   while (true) {
-    const requestAction = yield take('REQUEST');
+    const requestAction = yield take("REQUEST");
     const { resultReducerAction } = requestAction;
     yield put(
       resultReducerAction({
         loading: true,
         error: false,
-        errorMsg: '',
+        errorMsg: "",
         response: null,
       }),
     );
@@ -104,12 +104,12 @@ function* requestFlow() {
 
 /** Delay the search request to an api for 1 second */
 function* searchRequest() {
-  yield debounce(1000, 'SEARCH_REQUEST', handler);
+  yield debounce(1000, "SEARCH_REQUEST", handler);
 }
 
 /** Queue up to 5 request and handle each one of them in order */
 function* requestQueue() {
-  const requestChan = yield actionChannel('REQUEST_QUEUE', buffers.sliding(5));
+  const requestChan = yield actionChannel("REQUEST_QUEUE", buffers.sliding(5));
   while (true) {
     const requestAction = yield take(requestChan);
     const { startReducerAction } = requestAction;

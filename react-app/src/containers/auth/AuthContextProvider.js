@@ -1,86 +1,67 @@
-import React, { useReducer, createContext, useEffect, useState } from 'react';
+import React, { useReducer, createContext, useEffect } from "react";
 
 export const AuthContext = createContext({});
 
 const initialState = {
-  fetching: true,
+  isLoading: true,
   isAuthenticated: false,
-  error: '',
+  error: "",
 };
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'authenticated':
+    case "authenticated":
       return {
         ...state,
         isAuthenticated: action.payload.isAuthenticated,
         fetching: action.payload.fetching,
         isAdmin: action.payload.isAdmin,
-        error: '',
+        error: "",
       };
-    case 'logout':
+    case "logout":
       return {
         ...state,
         isAuthenticated: false,
         isAdmin: false,
-        error: '',
+        error: "",
         fetching: false,
       };
-    case 'error':
+    case "loading":
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    case "error":
       return { ...state, error: action.payload };
     default:
       throw new Error();
   }
 };
 
-const AuthContextProvider = props => {
+const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
-  const [propsState, setProps] = useState(null);
 
+  /** Runs on every new page once to check if user exist */
   useEffect(() => {
-    try {
-      // check if user is already authenticated
-      if (true) {
-        dispatch({
-          type: 'authenticated',
-          payload: {
-            isAuthenticated: true,
-            error: '',
-            isAdmin: true,
-            fetching: false,
-          },
-        });
-      } else {
-        dispatch({
-          type: 'authenticated',
-          payload: {
-            isAuthenticated: false,
-            isAdmin: false,
-            error: '',
-            fetching: false,
-          },
-        });
-      }
-    } catch (err) {
-      dispatch({
-        type: 'authenticated',
-        payload: {
-          isAuthenticated: false,
-          isAdmin: false,
-          error: true,
-          fetching: false,
-        },
-      });
-    }
-  }, [state.isAdmin, state.isAuthenticated]);
+    dispatch({
+      type: "authenticated",
+      payload: {
+        isAuthenticated: true,
+        error: "",
+        isAdmin: false,
+        fetching: false,
+      },
+    });
+    dispatch({ type: "loading", payload: false });
+  }, []);
 
-  const { isAuthenticated, isAdmin, error, fetching } = state;
+  const { isAuthenticated, isLoading, isAdmin, error } = state;
 
   return (
     <AuthContext.Provider
-      value={{ isAdmin, isAuthenticated, dispatch, error, fetching }}
+      value={{ isAdmin, isAuthenticated, dispatch, error, isLoading }}
     >
-      {propsState}
+      {children}
     </AuthContext.Provider>
   );
 };

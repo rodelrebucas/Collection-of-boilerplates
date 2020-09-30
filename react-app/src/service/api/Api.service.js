@@ -40,7 +40,7 @@ const api = (() => {
     },
     getApi: () => {
       if (_api !== null) return _api;
-      throw Error('Initialize api first.');
+      throw Error("Initialize api first.");
     },
   };
 })();

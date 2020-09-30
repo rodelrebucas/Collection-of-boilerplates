@@ -5,21 +5,25 @@ import {
   REQUEST_TIMEOUT_MSG,
   ERROR_WITH_STATUS,
   SOMETHING_WENT_WRONG_MSG,
-} from './api.constants';
+} from "./api.constants";
 
 const transformResponse = response => {
   // We want the api to response with these keys
   // otherwise throw an error
   const { status, message, data } = response;
-  if (response.hasOwnProperty("status") && response.hasOwnProperty("message") && response.hasOwnProperty("data"))
+  if (
+    Object.hasOwnProperty.call(response, "status") &&
+    Object.hasOwnProperty.call(response, "message") &&
+    Object.hasOwnProperty.call(response, "data")
+  )
     return {
       httpStatusCode: status,
       message,
       data,
     };
-  else if (process.env.NODE_ENV === "development")
-    throw (new Error("Response is not an object!"))
-  else throw (new Error(SOMETHING_WENT_WRONG_MSG))
+  if (process.env.NODE_ENV === "development")
+    throw new Error("Response is not an object!");
+  else throw new Error(SOMETHING_WENT_WRONG_MSG);
 };
 
 class ResponseError extends Error {
@@ -32,7 +36,7 @@ class ResponseError extends Error {
   constructor(result, error) {
     super(result.message);
     this.fullErrorStack = error;
-    this.name = 'ResponseError';
+    this.name = "ResponseError";
     const { data, message, status } = result;
     const response = {
       data,

@@ -1,5 +1,5 @@
-import { call, all, spawn } from 'redux-saga/effects';
-import requestSaga from './request/request.saga';
+import { call, all, spawn } from "redux-saga/effects";
+import requestSaga from "./request/request.saga";
 
 export default function* rootSaga() {
   const sagas = [requestSaga];
