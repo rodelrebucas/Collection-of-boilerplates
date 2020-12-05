@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "build:android": "turtle build:android -t apk  -o ./releases/entangle.apk --keystore-path ./releases/expokeystore/Entangle.jks --keystore-alias $EXPO_KEYSTORE_ALIAS --allow-non-https-public-url --public-url http://127.0.0.1:8000/android-index.json",
+    "build:android": "turtle build:android -t apk  -o ./releases/app.apk --keystore-path ./releases/expokeystore/App.jks --keystore-alias $EXPO_KEYSTORE_ALIAS --allow-non-https-public-url --public-url http://127.0.0.1:8000/android-index.json",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
