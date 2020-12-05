@@ -10,6 +10,31 @@ import {
   spawn,
 } from "redux-saga/effects";
 import { channel, buffers } from "redux-saga";
+import { createAction } from "@reduxjs/toolkit";
+
+/**
+ *  Sample dispatching requests
+ *   @param payload: Object
+ *  addRequestAction(payload)
+ */
+/** -- Sample action that changes the reducer */
+export const addRequestAction = (payload) => ({
+  type: "REQUEST",
+  method: () => {}, // http method
+  route: "/post/route",
+  resultReducerAction: () => {}, // fn is a reducer action
+  payload,
+});
+
+/** Requests are intercepted by saga,
+ *  either create a request that changes
+ *  the reducer and dispatched from saga or
+ *  just create an action to be intercepted by saga
+ */
+/** sample action to be intercepted by saga */
+export const refreshUserAfterDeleteAction = createAction(
+  "REQUEST_REFRESH_USER_AFTER_DELETE"
+);
 
 export function* retry(count, msDelay, method, route, payload) {
   let error;
