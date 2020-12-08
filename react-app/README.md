@@ -18,7 +18,7 @@ npm i connected-react-router \
                 history \
                 i18next \
                 i18next-browser-languagedetector \
-                node-sass \
+                sass \
                 prop-types \
                 react-i18next \
                 react-redux \
