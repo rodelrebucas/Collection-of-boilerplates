@@ -1,24 +1,23 @@
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
-import createRootReducer from "./reducer";
+// import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import rootSaga from "./saga";
 import { persistStore } from "redux-persist";
-
-let store;
-let persistor;
+import createRootReducer from "./reducer";
 
 export default () => {
   const sagaMiddleware = createSagaMiddleware();
   // eslint-disable-next-line no-undef
   const middlewares = [sagaMiddleware];
-  store = createStore(
+  const store = createStore(
     createRootReducer(),
     // composeWithDevTools(applyMiddleware(...middlewares)),
     applyMiddleware(...middlewares)
   );
-  persistor = persistStore(store);
+  const persistor = persistStore(store);
   sagaMiddleware.run(rootSaga);
+
+  return { store, persistor };
 };
 
 export { store, persistor };

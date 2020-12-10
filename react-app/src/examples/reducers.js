@@ -1,5 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 /** Sample root reducer
  *  const reducers = {
@@ -36,6 +35,7 @@ const reducerDefaultObjectBuilder = () => {
 const initialState = {
   "users/update": reducerDefaultObjectBuilder(),
 };
+/* eslint-disable no-param-reassign */
 const mapResponseToState = (stateKey, state, action) => {
   state[stateKey].loading = action.payload.loading;
   state[stateKey].error = action.payload.error;

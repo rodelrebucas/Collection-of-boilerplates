@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Route,
   Switch,
@@ -9,7 +9,6 @@ import {
 import AdminComponent from "./admin";
 import UserComponent from "./user";
 import { Error404 } from "./errors";
-import { AuthContext } from "./auth/AuthContextProvider";
 
 const DEFAULT_REDIRECT_TO = "/login";
 
@@ -17,14 +16,16 @@ const DEFAULT_REDIRECT_TO = "/login";
  *  should wait for authentication service
  *  before deciding which route to show.
  */
+/* eslint-disable react/prop-types */
 const ProtectedRoutes = ({ children, path }) => {
-  const { isAuthenticated, isLoading } = useContext(AuthContext);
   return (
     <Route
       path={path}
       render={() => {
-        if (!isLoading)
-          if (isAuthenticated)
+        if (!true)
+          if (true)
+            // not loading
+            // authenticated
             /** Children  is either nested routes or component  or */
             return <>{children}</>;
           /** Unathenticated request should redirect to login */ else
@@ -36,7 +37,7 @@ const ProtectedRoutes = ({ children, path }) => {
                 }}
               />
             );
-        else {
+        /* eslint-disable no-else-return */ else {
           /** Create loader while waiting for authentication */
           return <h1>Loading...</h1>;
         }
@@ -46,14 +47,13 @@ const ProtectedRoutes = ({ children, path }) => {
 };
 
 const ChildrenRoutes = () => {
-  const { isAdmin } = useContext(AuthContext);
   const { path } = useRouteMatch();
   return (
     <Switch>
-      {isAdmin ? (
-        <Route path={`${path}/admin`} component={AdminComponent} />
+      {true ? (
+        <Route path={`${path}/admin`} component={AdminComponent} /> // admin routes
       ) : (
-        <Route path={`${path}/user`} component={UserComponent} />
+        <Route path={`${path}/user`} component={UserComponent} /> // non admin
       )}
       {/* Catch all routes on /member/!admin || !user */}
       <Route component={Error404} />
@@ -71,36 +71,37 @@ const LoginComponent = () => {
 
 const App = () => {
   const history = useHistory();
-  const { isAuthenticated } = useContext(AuthContext);
   return (
-    <Switch>
-      {/* Root route for testing routes */}
-      <Route
-        exact
-        path="/"
-        render={() => (
-          <>
-            <button onClick={() => history.push("/member/admin")}>
-              to admin
-            </button>
-            <button onClick={() => history.push("/login")}>to login</button>
-          </>
+    <div>
+      <Switch>
+        {/* Root route for testing routes */}
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <>
+              <button onClick={() => history.push("/member/admin")}>
+                to admin
+              </button>
+              <button onClick={() => history.push("/login")}>to login</button>
+            </>
+          )}
+        />
+
+        {/* Remove login route if authenticated */}
+        {true ? null : ( // isAuthenticated
+          <Route exact path="/login" component={LoginComponent} />
         )}
-      />
 
-      {/* Remove login route if authenticated*/}
-      {isAuthenticated ? null : (
-        <Route exact path="/login" component={LoginComponent} />
-      )}
+        {/* Protect all routes inside */}
+        <ProtectedRoutes path="/member">
+          <ChildrenRoutes />
+        </ProtectedRoutes>
 
-      {/* Protect all routes inside */}
-      <ProtectedRoutes path="/member">
-        <ChildrenRoutes />
-      </ProtectedRoutes>
-
-      {/* Catch all routes */}
-      <Route component={Error404} />
-    </Switch>
+        {/* Catch all routes */}
+        <Route component={Error404} />
+      </Switch>
+    </div>
   );
 };
 

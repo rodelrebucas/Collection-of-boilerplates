@@ -36,6 +36,7 @@ export const refreshUserAfterDeleteAction = createAction(
   "REQUEST_REFRESH_USER_AFTER_DELETE"
 );
 
+/** App Sagas that handles type *REQUEST* */
 export function* retry(count, msDelay, method, route, payload) {
   let error;
   for (let i = 0; i < count; i += 1) {

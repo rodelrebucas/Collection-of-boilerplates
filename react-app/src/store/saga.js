@@ -7,15 +7,42 @@ import {
   all,
   debounce,
   actionChannel,
+  spawn,
 } from "redux-saga/effects";
 import { channel, buffers } from "redux-saga";
+import { createAction } from "@reduxjs/toolkit";
 
-function* retry(count, msDelay, method, route, payload) {
+/**
+ *  Sample dispatching requests
+ *   @param payload: Object
+ *  addRequestAction(payload)
+ */
+/** -- Sample action that changes the reducer */
+export const addRequestAction = payload => ({
+  type: "REQUEST",
+  method: () => {}, // http method
+  route: "/post/route",
+  resultReducerAction: () => {}, // fn is a reducer action
+  payload,
+});
+
+/** Requests are intercepted by saga,
+ *  either create a request that changes
+ *  the reducer and dispatched from saga or
+ *  just create an action to be intercepted by saga
+ */
+/** sample action to be intercepted by saga */
+export const refreshUserAfterDeleteAction = createAction(
+  "REQUEST_REFRESH_USER_AFTER_DELETE",
+);
+
+/** App Sagas that handles type *REQUEST* */
+export function* retry(count, msDelay, method, route, payload) {
   let error;
   for (let i = 0; i < count; i += 1) {
     try {
-      const apiResponse = yield call(method, route, payload);
-      return apiResponse;
+      const res = yield call(method, route, payload);
+      return res;
     } catch (err) {
       if (i < count - 1) {
         yield delay(msDelay);
@@ -23,33 +50,22 @@ function* retry(count, msDelay, method, route, payload) {
       error = err;
     }
   }
-  // Throw the final catched error so
-  // reducers that rely on error responses
-  // can received the response data
+  /** Throw the final catched error so
+   * reducers that rely on error responses
+   * can received the response data */
   throw error;
 }
 
 export function* returnErrorResponseAction(err, action) {
   const { response } = err;
-  if (response) {
-    yield put(
-      action({
-        loading: false,
-        error: true,
-        errorMsg: "",
-        response,
-      }),
-    );
-  } else {
-    yield put(
-      action({
-        loading: false,
-        response: null,
-        error: true,
-        errorMsg: err.message || "",
-      }),
-    );
-  }
+  yield put(
+    action({
+      loading: false,
+      response,
+      error: true,
+      errorMsg: err.message || "",
+    }),
+  );
 }
 
 function* handler(action) {
@@ -90,6 +106,9 @@ function* requestFlow() {
   while (true) {
     const requestAction = yield take("REQUEST");
     const { resultReducerAction } = requestAction;
+
+    // First reducer mutation
+    // Note: Response is null
     yield put(
       resultReducerAction({
         loading: true,
@@ -118,13 +137,26 @@ function* requestQueue() {
   }
 }
 
-function* root() {
-  /** Types of request that are handled.
-   *  REQUEST        - requestFlow handler
-   *  SEARCH_REQUEST - searchRequest handler
-   *  REQUEST_QUEUE  - requestQueue handler
-   */
-  yield all([fork(requestFlow), fork(searchRequest), fork(requestQueue)]);
+/** Start request saga */
+function* requestSaga() {
+  yield all([call(requestFlow), call(searchRequest), call(requestQueue)]);
 }
 
-export default root;
+export default function* rootSaga() {
+  const sagas = [requestSaga];
+  yield all(
+    sagas.map(saga =>
+      // eslint-disable-next-line func-names
+      spawn(function*() {
+        while (true) {
+          try {
+            yield call(saga);
+            break;
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      }),
+    ),
+  );
+}

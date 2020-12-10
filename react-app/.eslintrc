@@ -1,10 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
+  "plugins": ["react", "jsx-a11y", "import"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
@@ -28,13 +24,16 @@
     "react/button-has-type": 1,
     "import/prefer-default-export": 1,
     "react/destructuring-assignment": "off",
-    "jsx-a11y/label-has-for": [ 2, {
-      "components": [ "Label" ],
-      "required": {
-          "some": [ "nesting", "id" ]
-      },
-      "allowChildren": false
-    }]
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "components": ["Label"],
+        "required": {
+          "some": ["nesting", "id"]
+        },
+        "allowChildren": false
+      }
+    ]
   },
   "globals": {
     "Generator": true,

@@ -1,16 +1,18 @@
 import React from "react";
-import { Provider } from "react-redux";
+// import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { PersistGate } from "redux-persist/integration/react";
+// import { PersistGate } from "redux-persist/integration/react";
 import "./utils/i18n";
 import { enableScreens } from "react-native-screens";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import createStore, { store, persistor } from "./store";
+// import createStore from "./store";
 import { Text } from "react-native";
 
+// *Note: uncomment store related elements if you have atleast 1 reducer.
+
 enableScreens();
-// createStore();
+// const {store, persistor} = createStore();
 
 const Stack = createStackNavigator();
 
