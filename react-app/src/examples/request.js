@@ -9,7 +9,7 @@ import { updateReducerAction } from "./reducers";
  *  Sample action that changes the reducer because of already setup saga
  *  that handles action of type `REQUEST`
  */
-export const addRequestAction = payload => ({
+export const addRequestAction = (payload) => ({
   type: "REQUEST",
   method: ApiService.getApi().post,
   route: "/post/route",

@@ -18,7 +18,7 @@ import { createAction } from "@reduxjs/toolkit";
  *  addRequestAction(payload)
  */
 /** -- Sample action that changes the reducer */
-export const addRequestAction = payload => ({
+export const addRequestAction = (payload) => ({
   type: "REQUEST",
   method: () => {}, // http method
   route: "/post/route",
@@ -145,7 +145,7 @@ function* requestSaga() {
 export default function* rootSaga() {
   const sagas = [requestSaga];
   yield all(
-    sagas.map(saga =>
+    sagas.map((saga) =>
       // eslint-disable-next-line func-names
       spawn(function*() {
         while (true) {

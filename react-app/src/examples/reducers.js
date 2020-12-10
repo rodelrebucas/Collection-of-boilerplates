@@ -9,15 +9,15 @@ import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 /** Creating selectors */
 const isProfileFoundSelector = createSelector(
-  state => state.profile,
-  profile =>
+  (state) => state.profile,
+  (profile) =>
     profile["profile/update"].name != null &&
     profile["profile/update"].url != null,
 );
 
 const userUrlSelector = createSelector(
-  state => state.profile,
-  profile => profile["profile/update"].url,
+  (state) => state.profile,
+  (profile) => profile["profile/update"].url,
 );
 
 export { isProfileFoundSelector, userUrlSelector };
