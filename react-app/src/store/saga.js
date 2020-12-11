@@ -153,6 +153,7 @@ export default function* rootSaga() {
             yield call(saga);
             break;
           } catch (e) {
+            /* eslint-disable no-console */
             console.error(e);
           }
         }

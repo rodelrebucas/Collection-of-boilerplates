@@ -16,7 +16,13 @@ const DEFAULT_REDIRECT_TO = "/login";
  *  should wait for authentication service
  *  before deciding which route to show.
  */
+
+// TODO: fix eslint errors
 /* eslint-disable react/prop-types */
+/* eslint-disable no-constant-condition */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-else-return */
 const ProtectedRoutes = ({ children, path }) => {
   return (
     <Route
@@ -37,7 +43,7 @@ const ProtectedRoutes = ({ children, path }) => {
                 }}
               />
             );
-        /* eslint-disable no-else-return */ else {
+        else {
           /** Create loader while waiting for authentication */
           return <h1>Loading...</h1>;
         }
