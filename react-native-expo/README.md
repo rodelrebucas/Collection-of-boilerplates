@@ -2,7 +2,7 @@ React Native Expo boilerplate
 
 _Expo SDK 39_
 
-Features:
+Libraries:
 
 1. React navigation
 
