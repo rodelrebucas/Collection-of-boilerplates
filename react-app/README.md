@@ -4,7 +4,7 @@ Libraries:
 
 1. @reduxjs/toolkit - for redux setup.
 2. connected-react-router - for dispatching router action inside saga.
-3. redux-saga - async side affects.
+3. redux-saga - async side effects.
 4. axios - for http requests.
 5. husky - code checks
 6. redux-devtools-extension
