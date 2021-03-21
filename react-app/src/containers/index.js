@@ -6,9 +6,9 @@ import {
   useHistory,
   useRouteMatch,
 } from "react-router-dom";
-import AdminComponent from "./admin";
-import UserComponent from "./user";
-import { Error404 } from "./errors";
+import AdminComponent from "./Admin/Admin";
+import UserComponent from "./User/User";
+import Error404 from "../core/components/errors";
 
 const DEFAULT_REDIRECT_TO = "/login";
 
@@ -89,13 +89,13 @@ const App = () => {
               <button onClick={() => history.push("/member/admin")}>
                 to admin
               </button>
-              <button onClick={() => history.push("/login")}>to login</button>
+              <button onClick={() => history.push("/  ")}>to login</button>
             </>
           )}
         />
 
         {/* Remove login route if authenticated */}
-        {true ? null : ( // isAuthenticated
+        {true ? null : ( // true - authenticated otherwise false
           <Route exact path="/login" component={LoginComponent} />
         )}
 
