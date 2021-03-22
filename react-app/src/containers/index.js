@@ -28,7 +28,7 @@ const ProtectedRoutes = ({ children, path }) => {
     <Route
       path={path}
       render={() => {
-        if (!true)
+        if (true)
           if (true)
             // not loading
             // authenticated
