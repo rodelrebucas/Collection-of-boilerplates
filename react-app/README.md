@@ -12,6 +12,7 @@ Libraries:
 8. react-i18next - internationalization
 9. i18next-browser-languagedetector - detecting browser language
 10. react-router-dom - navigation
+11. pm2 - running production server
 
 A. Install dependencies:
 
@@ -29,7 +30,8 @@ npm i connected-react-router \
                 redux-devtools-extension \
                 redux-persist \
                 redux-saga \
-                @reduxjs/toolkit
+                @reduxjs/toolkit \
+                pm2
 ```
 
 B. Copy these folder to new project:
