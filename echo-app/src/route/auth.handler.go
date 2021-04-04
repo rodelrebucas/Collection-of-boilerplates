@@ -1,9 +1,10 @@
 package route
 
 import (
-	"os"
 	"net/http"
+	"os"
 	"time"
+
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo/v4"
 )
@@ -20,7 +21,7 @@ import (
 func AuthenticateHandler(c echo.Context) (err error) {
 	errorRes := &ErrorUser{
 		Status: 404,
-		Msg:  "",
+		Msg:    "",
 	}
 	user := &GenericUser{
 		err: map[string]string{
@@ -45,7 +46,7 @@ func AuthenticateHandler(c echo.Context) (err error) {
 	errorRes.Msg = "User Not Found!"
 	errorRes.Status = http.StatusBadRequest
 	return c.JSON(http.StatusBadRequest, errorRes)
-	
+
 }
 
 // CheckUser - check for existing users
@@ -53,7 +54,9 @@ func CheckExistingUser(u *GenericUser) bool {
 	// TODO: Add user retrieval logic
 	if u.ID == os.Getenv("KNOWN_USER") {
 		return true
-	} else { return false }
+	} else {
+		return false
+	}
 }
 
 // CreateToken - creates the token for the specified user

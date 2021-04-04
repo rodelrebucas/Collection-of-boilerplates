@@ -2,12 +2,12 @@ package test
 
 import (
 	"encoding/json"
-	"sample/server/env"
-	"sample/server/route"
 	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"sample/server/env"
+	"sample/server/route"
 	"strings"
 	"testing"
 	"time"
@@ -45,44 +45,46 @@ func loadEnvTest() *env.Var {
 
 func TestAuthentication(t *testing.T) {
 
-	// setup
+	// Setup
 	envVar := loadEnvTest()
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodPost, "/authenticate", strings.NewReader(userJSON))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
-	authHandler := route.AuthenticateHandler(envVar.Secret)
 
-	if assert.NoError(t, authHandler(c)) {
-		assert.Equal(t, http.StatusOK, rec.Code)
+	// A User DOES NOT exist
+	// Assert Test user does not exist
+	if assert.NoError(t, route.AuthenticateHandler(c)) {
+		assert.Equal(t, http.StatusBadRequest, rec.Code)
 		assert.NotEmpty(t, rec.Body.String())
 	}
+
+	// A User DOES exist
+	// Assert a user exist and does have a token
 	var token userToken
 	var s string
 	s = rec.Body.String()
-	jsonerr := json.Unmarshal([]byte(s), &token)
+	_ = json.Unmarshal([]byte(s), &token)
+	if token.Token != "" {
+		// Assert token has correct signing method
+		parsedToken, err := jwt.Parse(token.Token, func(token *jwt.Token) (interface{}, error) {
+			_, ok := token.Method.(*jwt.SigningMethodHMAC)
+			assert.True(t, ok)
+			return []byte(envVar.Secret), nil
+		})
+		assert.Nil(t, err)
 
-	assert.Nil(t, jsonerr)
-
-	parsedToken, err := jwt.Parse(token.Token, func(token *jwt.Token) (interface{}, error) {
-		_, ok := token.Method.(*jwt.SigningMethodHMAC)
+		// Assert token has correct claims
+		claims, ok := parsedToken.Claims.(jwt.MapClaims)
 		assert.True(t, ok)
-		return []byte(envVar.Secret), nil
-	})
+		assert.True(t, parsedToken.Valid)
+		assert.Equal(t, claims["sub"], "testUser")
 
-	assert.Nil(t, err)
-
-	claims, ok := parsedToken.Claims.(jwt.MapClaims)
-
-	assert.True(t, ok)
-	assert.True(t, parsedToken.Valid)
-	assert.Equal(t, claims["sub"], "testUser")
-
-	// test token expiration time is 30mins
-	if m, ok := claims["exp"].(string); ok {
-		p, _ := time.Parse(time.RFC3339, m)
-		assert.WithinDuration(t, time.Now().Add(time.Minute*30), p, 10*time.Minute)
+		// Assert test token has expiration time of 30mins
+		if m, ok := claims["exp"].(string); ok {
+			p, _ := time.Parse(time.RFC3339, m)
+			assert.WithinDuration(t, time.Now().Add(time.Minute*30), p, 10*time.Minute)
+		}
 	}
-
 }
