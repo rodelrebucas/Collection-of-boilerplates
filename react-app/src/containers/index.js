@@ -1,56 +1,9 @@
 import React from "react";
-import {
-  Route,
-  Switch,
-  Redirect,
-  useHistory,
-  useRouteMatch,
-} from "react-router-dom";
+import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import AdminComponent from "./Admin/Admin";
 import UserComponent from "./User/User";
 import Error404 from "../core/components/errors";
-
-const DEFAULT_REDIRECT_TO = "/login";
-
-/** Accessing protected routes
- *  should wait for authentication service
- *  before deciding which route to show.
- */
-
-// TODO: fix eslint errors
-/* eslint-disable react/prop-types */
-/* eslint-disable no-constant-condition */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-else-return */
-const ProtectedRoutes = ({ children, path }) => {
-  return (
-    <Route
-      path={path}
-      render={() => {
-        if (true)
-          if (true)
-            // not loading
-            // authenticated
-            /** Children  is either nested routes or component  or */
-            return <>{children}</>;
-          /** Unathenticated request should redirect to login */ else
-            return (
-              <Redirect
-                to={{
-                  exact: true,
-                  pathname: DEFAULT_REDIRECT_TO,
-                }}
-              />
-            );
-        else {
-          /** Create loader while waiting for authentication */
-          return <h1>Loading...</h1>;
-        }
-      }}
-    />
-  );
-};
+import ProtectedRoutes from "../core/container/Auth/ProtectedRoute/ProtectedRoute";
 
 const ChildrenRoutes = () => {
   const { path } = useRouteMatch();
