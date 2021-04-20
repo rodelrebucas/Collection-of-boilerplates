@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import { PersistGate } from "redux-persist/integration/react";
 import Container from "./containers";
-import setupStore from "./store";
-import setUpApi from "./service/api";
+import setupStore from "./core/store";
+import setUpApi from "./core/service/api";
 import "./utils/i18n";
 import "./App.scss";
 
