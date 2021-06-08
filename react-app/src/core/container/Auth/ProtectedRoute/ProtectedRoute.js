@@ -37,6 +37,7 @@ const ProtectedRoutes = ({ children, ...args }) => {
   if (args)
     // Render a nested route with base path and/or other args.
     return (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Route {...args}>
         <ProtectedRoutesComponent>{children}</ProtectedRoutesComponent>
       </Route>
