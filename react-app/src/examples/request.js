@@ -1,5 +1,5 @@
 import createAction from "@reduxjs/toolkit";
-import ApiService from "../core/service/api";
+import { api } from "../core/service/api";
 import { updateReducerAction } from "./reducers";
 
 /**
@@ -11,7 +11,7 @@ import { updateReducerAction } from "./reducers";
  */
 export const addRequestAction = (payload) => ({
   type: "REQUEST",
-  method: ApiService.getApi().post,
+  method: api.getApi().post,
   route: "/post/route",
   resultReducerAction: updateReducerAction,
   payload,
