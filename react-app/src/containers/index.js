@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-import AdminComponent from "./Admin/Admin";
-import UserComponent from "./User/User";
-import Error404 from "../core/components/errors";
-import ProtectedRoutes from "../core/container/Auth/ProtectedRoute/ProtectedRoute";
+import AdminComponent from "containers/Admin/Admin";
+import UserComponent from "containers/User/User";
+import Error404 from "core/components/errors";
+import ProtectedRoutes from "core/container/Auth/ProtectedRoute/ProtectedRoute";
 
 const ChildrenRoutes = () => {
   const { path } = useRouteMatch();
