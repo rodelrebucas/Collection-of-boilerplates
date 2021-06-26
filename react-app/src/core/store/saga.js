@@ -57,11 +57,10 @@ export function* retry(count, msDelay, method, route, payload) {
 }
 
 export function* returnErrorResponseAction(err, action) {
-  const { response } = err;
   yield put(
     action({
       loading: false,
-      response,
+      response: err.data,
       error: true,
       errorMsg: err.message || "",
     }),
@@ -71,17 +70,21 @@ export function* returnErrorResponseAction(err, action) {
 function* handler(action) {
   const { resultReducerAction } = action;
   const { method, payload, route } = action;
+  let defaultRetry = 2;
+  if (Object.keys(action).includes("retry")) defaultRetry = action.retry;
   try {
     let result;
-    if (payload) result = yield retry(2, 4000, method, route, payload);
-    else result = yield retry(2, 4000, method, route);
-    const { response } = result;
+    // Requests with payload
+    if (payload)
+      result = yield retry(defaultRetry, 4000, method, route, payload);
+    // Requests with no payload
+    else result = yield retry(defaultRetry, 4000, method, route);
     yield put(
       resultReducerAction({
         loading: false,
         error: false,
         errorMsg: "",
-        response,
+        response: result,
       }),
     );
   } catch (err) {
