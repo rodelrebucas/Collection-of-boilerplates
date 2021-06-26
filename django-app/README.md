@@ -1,22 +1,21 @@
-### Django alternative structure
+## Django alternative structure
+
+Using this project as a project template.
+
+`$ django-admin startproject --template=PATH/TO/Collection-of-boilerplates/django-appp <project-name>`
+
 ---
-### A. Setup
 
-`$ pipenv install django`
+A. Setup
 
-##### Using the project template
+1. Install python [poetry](https://python-poetry.org/)
 
-`$ django-admin startproject --template=https://github.com/rodelrebucas/django-structure-template/archive/master.zip <project-name>`
+2. Install dependencies:
 
-##### Install the dependencies:
+        $ poetry install
 
-1. django-environ
+B. Creating apps
 
-2. django-debug-toolbar
+1.  On your apps folder: `project_name/apps/`
 
-
-### B. Creating apps
-
-##### On your apps folder: `project_name/apps/`
-
-`$ ../manage.py startapp apps/<app-name>`
+        $ ../manage.py startapp apps/<app-name>
