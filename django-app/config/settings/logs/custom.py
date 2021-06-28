@@ -29,8 +29,12 @@ LOGGING = {
             "()": "django.utils.log.CallbackFilter",
             "callback": filter_duplicate,
         },
-        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse",},
-        "require_debug_true": {"()": "django.utils.log.RequireDebugTrue",},
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
     },
     "handlers": {
         "console": {
@@ -50,7 +54,10 @@ LOGGING = {
         },
         "production_handler": {
             "level": "INFO",
-            "filters": ["require_debug_false", "custom_filter_duplicate",],
+            "filters": [
+                "require_debug_false",
+                "custom_filter_duplicate",
+            ],
             "class": "logging.handlers.RotatingFileHandler",  # set maxsize(bytes), backup count
             "filename": "<to path>/django_production.log",  # path to log folder, should be writeable
             "maxBytes": 1024 * 1024 * 100,  # 100MB
@@ -62,7 +69,9 @@ LOGGING = {
             "filters": ["require_debug_false"],
             "class": "django.utils.log.AdminEmailHandler",
         },
-        "null": {"class": "logging.NullHandler",},
+        "null": {
+            "class": "logging.NullHandler",
+        },
     },
     "loggers": {
         "django": {
@@ -74,12 +83,18 @@ LOGGING = {
             ],
         },
         "django.security": {
-            "handlers": ["mail_admins",],
+            "handlers": [
+                "mail_admins",
+            ],
             "level": "ERROR",
             "propagate": False,
         },
         "py.warnings": {
-            "handlers": ["console", "production_handler", "development_handler",],
+            "handlers": [
+                "console",
+                "production_handler",
+                "development_handler",
+            ],
         },
     },
 }

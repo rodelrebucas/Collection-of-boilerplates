@@ -31,11 +31,13 @@ env = environ.Env()
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
 
 if READ_DOT_ENV_FILE:
-    # --> point this to your .env file
+    ## Looks for keys present in .env files.
+    ## If key is present but no value, raises an error.
+    ## If key is not present, default is used.
+
+    ## Point this to your .env file
     env_file = str(ROOT_DIR.path(".env"))
-    print("Loading : {}".format(env_file))
     env.read_env(env_file)
-print("The .env file ha  s been loaded. See base.py for more information")
 
 
 # Quick-start development settings - unsuitable for production
@@ -43,7 +45,9 @@ print("The .env file ha  s been loaded. See base.py for more information")
 
 
 ## SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = env(
+    "DJANGO_SECRET_KEY", default="#qyfwdupwy_h)95jot--$+cc8bibaco2ui7!3@7(5-z5%2mu(+"
+)
 
 ## SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", False)
