@@ -1,5 +1,5 @@
 from .base import *
-from .log.custom import *
+from .logs.custom import *
 import datetime
 
 ## SECURITY WARNING: keep the secret key used in production secret!
@@ -9,7 +9,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = False
 
 ## Can't be empty on production setup
-ALLOWED_HOSTS = [""]
+ALLOWED_HOSTS = []
 
 ## Expire sessions
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -18,7 +18,7 @@ ROOT_URLCONF = "config.urls.production"
 
 THIRD_PARTY_APPS = ()
 
-LOCAL_APPS = ()
+LOCAL_APPS = ("home.apps.HomeConfig",)
 
 INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
 
@@ -48,8 +48,6 @@ MIDDLEWARE += []
 # }
 
 ## MORE security on deployment ,Please check documentation for more details
-# SECURE_PROXY_SSL_HEADER
-
 SECURE_SSL_REDIRECT = True
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")

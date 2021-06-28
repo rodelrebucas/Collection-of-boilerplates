@@ -47,7 +47,7 @@ LOGGING = {
             "level": "DEBUG",
             "filters": ["require_debug_true"],
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": "web/logs/django/django_development.log",  # path to log folder, should be writeable
+            "filename": "logs/django/django_development.log",  # path to log folder, should be writeable
             "maxBytes": 1024 * 1024 * 100,  # 100MB
             "backupCount": 5,
             "formatter": "verbose",
@@ -59,7 +59,7 @@ LOGGING = {
                 "custom_filter_duplicate",
             ],
             "class": "logging.handlers.RotatingFileHandler",  # set maxsize(bytes), backup count
-            "filename": "<to path>/django_production.log",  # path to log folder, should be writeable
+            "filename": "logs/django/django_production.log",  # path to log folder, should be writeable
             "maxBytes": 1024 * 1024 * 100,  # 100MB
             "backupCount": 5,
             "formatter": "simple",

@@ -4,5 +4,7 @@ import debug_toolbar
 
 urlpatterns += [
     path("__debug__/", include(debug_toolbar.urls)),
-    path("", include(("home.urls", "home"), namespace="home")),
+    ## If apps have multiple url's "app_name" named "home"
+    ## Django wants to distinguish to what namespace it belongs to.
+    path("", include("home.urls", namespace="home")),
 ]
