@@ -17,17 +17,17 @@ import sys
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 # ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# -->> Replace with ROOT_DIR with:
+## Replace with ROOT_DIR with:
 ROOT_DIR = environ.Path(__file__) - 3
 APPS_DIR = ROOT_DIR.path("apps")
 
-# -->> include your application path here
+## include your application path here
 sys.path.insert(0, str(APPS_DIR))
 
-# -->> Using django-environ
+## Using django-environ
 env = environ.Env()
 
-# This section added from an update to standards in CookieCutter Django to ensure no errors are encountered at runserver/migrations
+## This section added from an update to standards in CookieCutter Django to ensure no errors are encountered at runserver/migrations
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
 
 if READ_DOT_ENV_FILE:
@@ -42,20 +42,17 @@ print("The .env file ha  s been loaded. See base.py for more information")
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# -->> Remove secret key
-SECRET_KEY = env("SECRET_KEY")
+## SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# --> Set from env value
+## SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
-# --> ALLOWED_HOSTS override this one
+## ALLOWED_HOSTS override this one
 ALLOWED_HOSTS = []
 
 
-# Application definition
-
+## Application definition
 DJANGO_APPS = (
     "django.contrib.admin",
     "django.contrib.auth",
@@ -65,10 +62,7 @@ DJANGO_APPS = (
     "django.contrib.staticfiles",
 )
 
-THIRD_PARTY_APPS = ()
-
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
-
+INSTALLED_APPS = DJANGO_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -85,7 +79,9 @@ ROOT_URLCONF = "config.urls.base"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(ROOT_DIR.path("templates")),],
+        "DIRS": [
+            str(ROOT_DIR.path("templates")),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -99,7 +95,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -119,9 +114,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -147,7 +148,6 @@ STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 
 # Find static files here for all your apps
 STATICFILES_DIRS = (str(APPS_DIR.path("static")),)
-
 
 MEDIA_URL = "/media/"
 
