@@ -12,11 +12,15 @@ ADMINS = (("name", "email"),)
 
 MANAGERS = ADMINS
 
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY", default="#qyfwdupwy_h)95jot--$+cc8bibaco2ui7!3@7(5-z5%2mu(+"
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY",
+    env(
+        "DJANGO_SECRET_KEY",
+        default="#qyfwdupwy_h)95jot--$+cc8bibaco2ui7!3@7(5-z5%2mu(+",
+    ),
 )
 
-DEBUG = env.bool("DJANGO_DEBUG", default=True)
+DEBUG = os.getenv("DJANGO_DEBUG", env.bool("DJANGO_DEBUG", default=True))
 
 INTERNAL_IPS = ["127.0.0.1"]
 

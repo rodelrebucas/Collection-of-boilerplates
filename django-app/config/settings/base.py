@@ -30,11 +30,8 @@ env = environ.Env()
 ## This section added from an update to standards in CookieCutter Django to ensure no errors are encountered at runserver/migrations
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
 
+## Read .env file and also consider reading environment variables present on the system as a priority
 if READ_DOT_ENV_FILE:
-    ## Looks for keys present in .env files.
-    ## If key is present but no value, raises an error.
-    ## If key is not present, default is used.
-
     ## Point this to your .env file
     env_file = str(ROOT_DIR.path(".env"))
     env.read_env(env_file)
@@ -45,12 +42,16 @@ if READ_DOT_ENV_FILE:
 
 
 ## SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY", default="#qyfwdupwy_h)95jot--$+cc8bibaco2ui7!3@7(5-z5%2mu(+"
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY",
+    env(
+        "DJANGO_SECRET_KEY",
+        default="#qyfwdupwy_h)95jot--$+cc8bibaco2ui7!3@7(5-z5%2mu(+",
+    ),
 )
 
 ## SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DJANGO_DEBUG", False)
+DEBUG = os.getenv("DJANGO_DEBUG", env.bool("DJANGO_DEBUG", False))
 
 ## ALLOWED_HOSTS override this one
 ALLOWED_HOSTS = []
