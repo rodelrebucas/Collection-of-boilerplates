@@ -26,10 +26,7 @@ INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE += []
 
-## DEFINE host and dsn only if ODBC setup is enabled
-## example on the deployment folder
-
-## --> Implement caching
+## Implement caching
 # CACHES = {
 #     "default": {
 #         "BACKEND": "django_redis.cache.RedisCache",
