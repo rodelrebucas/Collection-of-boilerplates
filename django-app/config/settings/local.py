@@ -16,7 +16,7 @@ SECRET_KEY = os.getenv(
     "DJANGO_SECRET_KEY",
     env(
         "DJANGO_SECRET_KEY",
-        default="#qyfwdupwy_h)95jot--$+cc8bibaco2ui7!3@7(5-z5%2mu(+",
+        default="replacemeandhideme",
     ),
 )
 
